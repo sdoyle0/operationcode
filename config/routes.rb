@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
   devise_for :veterans, controllers: { registrations: 'veterans/registrations', sessions: 'veterans/sessions' }
+  devise_for :mentors, controllers: { registrations: 'mentors/registrations', sessions: 'mentors/sessions' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -11,6 +12,15 @@ Rails.application.routes.draw do
     get :sign_in, to: 'veterans/sessions#new'
 
     get 'profile/edit', to: 'veterans/registrations#edit'
+  end
+
+  devise_scope :mentors do
+    get :sign_up, to: 'mentors/registrations#new'
+    get :join, to: 'mentors/registrations#new'
+    get :login, to: 'mentors/sessions#new'
+    get :sign_in, to: 'mentors/sessions#new'
+
+    get 'profile/edit', to: 'mentors/registrations#edit'
   end
 
   # Split
